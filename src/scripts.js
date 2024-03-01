@@ -2,12 +2,12 @@
 // Do not delete or rename this file ********
 
 // An example of how you tell webpack to use a CSS (SCSS) file
-import { fetchTravelersData } from './apiCalls';
 import './css/styles.scss';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
 
+import './domUpdates';
 import 'boxicons';
 
 console.log('This is the JavaScript entry file - your code begins here.');
