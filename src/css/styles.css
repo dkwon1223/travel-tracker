@@ -43,6 +43,11 @@ body {
   background-size: cover;
 }
 
+.login-header {
+  margin-bottom: 10%;
+  text-align: center;
+}
+
 .login-inputs {
   border-radius: 0 2rem 2rem 0;
   display: flex;
@@ -50,6 +55,34 @@ body {
   justify-content: center;
   align-items: center;
   background-image: linear-gradient(to right top, #5470ab, #5e7db4, #6a8abd, #7698c6, #83a5cf, #83a5cf, #83a5cf, #83a5cf, #7698c6, #6a8abd, #5e7db4, #5470ab);
+}
+
+.login-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 4%;
+  margin-bottom: 4%;
+}
+
+.login-label {
+  margin-right: 2%;
+  text-align: center;
+}
+
+#logInButton {
+  border-radius: 1rem;
+  width: 40%;
+  height: 5%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  border: none;
+  cursor: pointer;
+}
+
+.login-error-message {
+  color: red;
 }
 
 .hidden {
