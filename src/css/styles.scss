@@ -12,7 +12,8 @@ body {
 
 html, 
 body,
-.login-page {
+.login-page,
+.traveler-dashboard {
   @include full-view();
 }
 
@@ -23,7 +24,8 @@ body,
   @include flex-centered();
 }
 
-.login-page {
+.login-page, 
+.traveler-dashboard {
   background-image: $main-background;
 }
 
