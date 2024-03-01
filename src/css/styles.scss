@@ -1,0 +1,95 @@
+html {
+  height: 100vh;
+  width: 100vw;
+  font-family: "Overpass", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+}
+
+.login-page {
+  height: 100vh;
+  width: 100vw;
+  background-image: linear-gradient(to right top, #102248, #1a325f, #244477, #2d5690, #3569aa, #3569aa, #3569aa, #3569aa, #2d5690, #244477, #1a325f, #102248);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  height: 80%;
+  width: 60%;
+  border-radius: 2rem;
+  box-shadow: 5px 5px 5px 3px rgba(0, 0, 0, 0.406);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-inputs, 
+.login-image {
+  height: 100%;
+  width: 50%;
+}
+
+.login-image {
+  border-radius: 2rem 0 0 2rem;
+  background-image: url("../images/travel-cover.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.login-header {
+  margin-bottom: 10%;
+  text-align: center;
+}
+
+.login-inputs {
+  border-radius: 0 2rem 2rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(to right top, #7d9bd8, #8aa6dc, #98b0e1, #a5bbe5, #b3c6e9, #b3c6e9, #b3c6e9, #b3c6e9, #a5bbe5, #98b0e1, #8aa6dc, #7d9bd8);
+}
+
+.login-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 4%;
+  margin-bottom: 4%;
+}
+
+.login-label {
+  margin-right: 2%;
+  text-align: center;
+}
+
+#logInButton {
+  background-color: #6883bc;
+  font-weight: 700;
+  font-size: large;
+  border-radius: 1rem;
+  width: 40%;
+  height: 8%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  border: none;
+  cursor: pointer;
+}
+
+.login-error-message {
+  font-weight: 400;
+  font-size: large;
+}
+
+.hidden {
+  display: none;
+}
