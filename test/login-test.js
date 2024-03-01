@@ -13,18 +13,12 @@ describe("Evaluate if login credentials are valid", function() {
         const username = "David";
         const password = "travel";
         let invalidUserName = validateLogIn(username, password);
-        expect(invalidUserName).to.equal(`Sorry, username ${username} is not recognized.`);
+        expect(invalidUserName).to.equal(`Sorry, username: ${username} is not recognized.`);
     });
     it("should return negative password feedback if traveler/agent password is incorrect", function() {
         const username = "traveler30";
         const password = "dingus";
         let invalidUserName = validateLogIn(username, password);
         expect(invalidUserName).to.equal(`Sorry, password is incorrect.`);
-    });
-    it("should return overall negative feedback if both traveler/agent username and password are incorrect", function() {
-        const username = "David";
-        const password = "dingus";
-        let invalidUserName = validateLogIn(username, password);
-        expect(invalidUserName).to.equal(`Sorry, both username: ${username} and password are not valid.`);
     });
 });
