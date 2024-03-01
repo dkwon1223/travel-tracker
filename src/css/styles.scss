@@ -34,7 +34,7 @@ body,
     url('../images/travel-cover.jpg');
   background-repeat: no-repeat;
   background-size: cover; 
-  height: 400%;
+  height: 500%;
 }
 
 .login-form {
@@ -111,15 +111,15 @@ body,
   display: flex;
   justify-content: flex-start;
   position: fixed;
-  background-color:rgba(0, 0, 0, 0.2);
+  background-color:rgba(0, 0, 0, 0.3);
 }
 
 #travelIcon {
-  height: 5%;
-  width: 5%;
+  height: 4%;
+  width: 4%;
   margin-top: 1%;
   margin-bottom: 1%;
-  margin-left: 1%;
+  margin-left: 2%;
   margin-right: 60%;
 }
 
@@ -133,5 +133,16 @@ body,
   color: white;
 }
 
+.nav-button:hover {
+  color:rgba(19, 33, 117, 0.7);
+  border-bottom: 5px solid rgba(19, 33, 117, 0.7);
+}
+
+.trip-request-widget {
+  display: flex;
+  height: 40%;
+  width: 90%;
+  border: 2px solid black;
+}
 
 
