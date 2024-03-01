@@ -1,0 +1,16 @@
+@mixin full-view() {
+    height: 100vh;
+    weight: 100vw;
+}
+
+@mixin flex-centered() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin button() {
+    cursor: pointer;
+    border: none;
+    border-radius: $rounded-border;
+}

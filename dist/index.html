@@ -4,10 +4,37 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
+  <title>Travel Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
+  <section class="login-page hidden">
+    <form class="login-form" type="submit">
+      <div class="login-image">
+      </div>
+      <div class="login-inputs">
+        <h1 class="login-header">TRAVEL TRACKER</h1>
+        <h2 class="login-header">SIGN IN</h2>
+        <div class="login-input">
+          <label for="username" class="login-label">Username:</label>
+          <box-icon class="login-icons"type='solid' name='user'></box-icon>
+          <input name="username" type="text" class="login-input" id="usernameInput"required>
+        </div>
+        <div class="login-input">
+          <label for="password" class="login-label">Password:</label>
+          <box-icon class="login-icons" type='solid' name='lock-alt'></box-icon>
+          <input name="password" type="password" class="login-input" id="passwordInput" required>
+        </div>
+        <button id="logInButton" type="button">Log In</button>
+        <p class="login-error-message"></p>
+      </div>
+    </form>
+  </section>
+  <section class="traveler-dashboard">
+
+  </section>
   
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
