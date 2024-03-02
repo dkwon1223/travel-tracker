@@ -138,9 +138,16 @@ body,
   border-bottom: 5px solid rgba(19, 33, 117, 0.7);
 }
 
-.trip-request-widget {
+.traveler-dashboard-widgets {
+  @include flex-centered();
+  @include full-dimensions();
+  flex-direction: column;
+  border: 2px solid black;
+}
+
+.widget {
   display: flex;
-  height: 40%;
+  height: 30%;
   width: 90%;
   border: 2px solid black;
 }
