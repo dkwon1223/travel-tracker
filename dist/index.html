@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 </head>
 <body>
-  <section class="login-page hidden">
+  <section class="login-page">
     <form class="login-form" type="submit">
       <div class="login-image">
       </div>
@@ -32,12 +32,14 @@
       </div>
     </form>
   </section>
-  <section class="traveler-dashboard">
+  <section class="traveler-dashboard hidden">
     <nav class="traveler-dashboard-nav">
       <img src="./images/travel-icon.svg" alt="Icon of plane flying around globe" id="travelIcon">
+      <h1 class="nav-user-info"></h1>
       <button class="nav-button">Request a Trip</button>
       <button class="nav-button">Your Trips</button>
       <button class="nav-button">Your Costs</button>
+      <button class="nav-button">Sign Out</button>
     </nav>
     <section class="traveler-dashboard-widgets">
       <section class="widget" id="tripRequestWidget"></section>

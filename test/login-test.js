@@ -7,7 +7,7 @@ describe("Evaluate if login credentials are valid", function() {
         const username = "traveler30";
         const password = "travel";
         let invalidUserName = validateLogIn(username, password);
-        expect(invalidUserName).to.equal(`Login successful.`);
+        expect(invalidUserName).to.equal(`Login successful. Redirecting...`);
     });
     it("should return negative username feedback if traveler/agent username is incorrect", function() {
         const username = "David";

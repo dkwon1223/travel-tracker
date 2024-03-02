@@ -120,22 +120,16 @@ body,
   margin-top: 1%;
   margin-bottom: 1%;
   margin-left: 2%;
-  margin-right: 60%;
+  margin-right: 30%;
 }
 
 .nav-button {
-  margin-right: 1%;
-  width: 10%;
-  font-size: large;
-  font-weight: 600;
+  @include nav-item();
   @include button();
-  background: none;
-  color: white;
 }
 
 .nav-button:hover {
-  color:rgba(19, 33, 117, 0.7);
-  border-bottom: 5px solid rgba(19, 33, 117, 0.7);
+  @include nav-hover();
 }
 
 .traveler-dashboard-widgets {
@@ -146,10 +140,22 @@ body,
 }
 
 .widget {
-  display: flex;
+  @include flex-centered();
   height: 30%;
   width: 90%;
   border: 2px solid black;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+#tripRequestWidget {
+  margin-top: 10%;
+}
+
+.nav-user-info {
+  @include nav-item();
+  width: 40%;
+  text-align: center;
 }
 
 

@@ -7,6 +7,10 @@ const usernameInput = document.querySelector("#usernameInput");
 const passwordInput = document.querySelector("#passwordInput");
 const loginErrorMessage = document.querySelector(".login-error-message");
 
+const travelerDashboard = document.querySelector(".traveler-dashboard");
+const userHeader = document.querySelector(".nav-user-info");
+let loggedInTraveler;
+
 logInButton.addEventListener("click", () => {
     const username = usernameInput.value;
     const password = passwordInput.value;
@@ -15,10 +19,14 @@ logInButton.addEventListener("click", () => {
         loginErrorMessage.innerHTML = validateLogIn(username, password);
         setTimeout(() => {
             loginPage.classList.add("hidden");
-        }, "3000");
+            travelerDashboard.classList.remove("hidden");
+            loggedInTraveler = JSON.parse(sessionStorage.getItem("loggedInTraveler"));
+            userHeader.innerHTML = `${loggedInTraveler.name} the ${loggedInTraveler.travelerType} <br> UserID: ${loggedInTraveler.id}`;
+        }, "2000");
     } else {
         loginErrorMessage.style.color = "red";
         loginErrorMessage.innerHTML = validateLogIn(username, password);
     }
 })
+
 
