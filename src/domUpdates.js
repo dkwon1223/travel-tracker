@@ -9,7 +9,9 @@ const loginErrorMessage = document.querySelector(".login-error-message");
 
 const travelerDashboard = document.querySelector(".traveler-dashboard");
 const userHeader = document.querySelector(".nav-user-info");
+const signOutButton = document.querySelector("#signOutButton");
 let loggedInTraveler;
+
 
 logInButton.addEventListener("click", () => {
     const username = usernameInput.value;
@@ -29,4 +31,8 @@ logInButton.addEventListener("click", () => {
     }
 })
 
+signOutButton.addEventListener("click", () => {
+    sessionStorage.removeItem("loggedInTraveler");
+    location.reload();
+})
 
