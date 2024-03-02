@@ -23,7 +23,7 @@ logInButton.addEventListener("click", () => {
             loginPage.classList.add("hidden");
             travelerDashboard.classList.remove("hidden");
             loggedInTraveler = JSON.parse(sessionStorage.getItem("loggedInTraveler"));
-            userHeader.innerHTML = `${loggedInTraveler.name} the ${loggedInTraveler.travelerType} <br> UserID: ${loggedInTraveler.id}`;
+            userHeader.innerHTML += `${loggedInTraveler.name} the ${loggedInTraveler.travelerType} <br> UserID: ${loggedInTraveler.id}`;
         }, "2000");
     } else {
         loginErrorMessage.style.color = "red";
