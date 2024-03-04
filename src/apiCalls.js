@@ -58,5 +58,20 @@ function fetchTrips() {
         .catch(error => console.log(error));
 }
 
+function postTrip(trip) {
+    fetch("http://localhost:3001/api/v1/trips", {
+        method: "POST",
+        body: JSON.stringify(trip),
+        headers: { "Content-Type": "application/json"}
+    })
+    .then(response => {
+        if(!response.ok) {
+            throw new Error("There was an issue adding your trip details. Please try again.")
+        }
+        return response.json();
+    })
+    .then(data => console.log(data))
+    .catch(error => console.log(error))
+}
 
 export { fetchTravelersData, fetchTraveler, fetchDestinations, fetchTrips }
