@@ -10,7 +10,17 @@ const loginErrorMessage = document.querySelector(".login-error-message");
 const travelerDashboard = document.querySelector(".traveler-dashboard");
 const userHeader = document.querySelector(".nav-user-info");
 const signOutButton = document.querySelector("#signOutButton");
+const destinationButton = document.querySelector("#destinationSelectButton");
+const destinationContainer = document.querySelector(".vacation-destinations");
+const destinationCover = document.querySelector(".trip-request-cover");
 let loggedInTraveler;
+const picker = new easepick.create({
+    element: document.getElementById('datepicker'),
+    css: [
+      'https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css',
+    ],
+    plugins: ['RangePlugin']
+});
 
 
 logInButton.addEventListener("click", () => {
@@ -36,10 +46,13 @@ signOutButton.addEventListener("click", () => {
     location.reload();
 })
 
-const picker = new easepick.create({
-    element: document.getElementById('datepicker'),
-    css: [
-      'https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css',
-    ],
-    plugins: ['RangePlugin']
-});
+destinationButton.addEventListener("click", () => {
+    destinationContainer.classList.remove("hidden");
+    destinationCover.classList.add("hidden");
+})
+
+
+
+
+
+

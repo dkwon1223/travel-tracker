@@ -46,15 +46,37 @@
         <h1>Discover Your Adventure</h1>
         <h2>Travel Where You Want</h2>
         <section class="travel-requester">
-          <label for="datepicker">Trip Duration:</label>
-          <input id="datepicker" name="datepicker">
-          <label for="travelerCount" type="number select">Number of Travelers:</label>
-          <input id="travelerCount" name="travelerCount" type="number" min="1">
-          <button id="destinationSelectButton">Select a Destination</button>
+          <div class="travel-inputs">
+            <h3>Request Your Trip</h3>
+            <div class="travel-input">
+              <label for="datepicker">Trip Duration</label>
+              <box-icon name='calendar'></box-icon>
+              <input id="datepicker" name="datepicker" required>
+            </div>
+            <div class="travel-input">
+              <label for="travelerCount" type="number select">Number of Travelers</label>
+              <box-icon name='group'></box-icon>
+              <input id="travelerCount" name="travelerCount" type="number" min="1" required>
+            </div>
+            <div class="travel-input">
+              <button id="destinationSelectButton">Select a Destination</button>
+            </div>
+            <div class="travel-input" id="estimatedCostFeedback">
+            </div>
+            <div class="travel-input">
+              <button id="requestTripButton">Request Trip</button>
+            </div>
+          </div>
+          <div class="trip-request-cover"></div>
+          <div class="vacation-destinations hidden"></div>
         </section>
       </section>
-      <section class="widget" id="travelerTripsWidget"></section>
-      <section class="widget" id="travelerCostsWidget"></section>
+      <section class="widget" id="travelerTripsWidget">
+        <h1>Your Trips</h1>
+      </section>
+      <section class="widget" id="travelerCostsWidget">
+        <h1>Your Vacation Spending</h1>
+      </section>
     </section>
   </section>
   
