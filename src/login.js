@@ -1,4 +1,4 @@
-import { fetchTravelersData } from "./apiCalls";
+import { fetchTravelersData, fetchTraveler } from "./apiCalls";
 
 const travelersData = fetchTravelersData();
 const data = await travelersData;
@@ -13,12 +13,20 @@ function validateLogIn(username, password) {
         currentID = parseInt(username.match(/[0-9]+/)[0],10);
     } 
     if(username.startsWith("traveler") && travelersIDs.includes(currentID) && password === "travel") {
-        return "Login successful.";
+        saveTraveler(currentID);
+        return "Login successful. Redirecting...";
     } else if(password === "travel" || !currentID) {
         return `Sorry, username: ${username} is not recognized.`;
     } else if(username.startsWith("traveler") && travelersIDs.includes(currentID) && password !== "travel") {
         return "Sorry, password is incorrect.";
     }
+}
+
+async function saveTraveler(id) {
+    const traveler = fetchTraveler(id);
+    const data = await traveler;
+    const loggedInTraveler = data;
+    sessionStorage.setItem("loggedInTraveler", JSON.stringify(loggedInTraveler));
 }
 
 export { validateLogIn }
