@@ -291,6 +291,30 @@ body,
   }
 }
 
+.trip-lister-container {
+  @include flex-centered();
+  height: 70%;
+  width: 90%;
+}
+
+.trip-lister {
+  @include flex-centered();
+  flex-direction: column;
+  border: 2px solid black;
+  border-radius: $rounded-border;
+  height: 100%;
+  width: 50%;
+  h2 {
+    margin-top: 0;
+    font-size: x-large;
+  }
+}
+
+.trip-list {
+  border: 2px solid black;
+  height: 90%;
+  width: 90%;
+}
 
 
 
