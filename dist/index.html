@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 </head>
 <body>
-  <section class="login-page">
+  <section class="login-page hidden">
     <form class="login-form" type="submit">
       <div class="login-image">
       </div>
@@ -32,7 +32,7 @@
       </div>
     </form>
   </section>
-  <section class="traveler-dashboard hidden">
+  <section class="traveler-dashboard">
     <nav class="traveler-dashboard-nav">
       <img src="./images/travel-icon.svg" alt="Icon of plane flying around globe" id="travelIcon">
       <h1 class="nav-user-info"><img src="./images/user-icon.svg" alt="white user icon of person silhouette" id="userIconNav"></h1>
@@ -42,7 +42,17 @@
       <button class="nav-button" id="signOutButton">Sign Out</button>
     </nav>
     <section class="traveler-dashboard-widgets">
-      <section class="widget" id="tripRequestWidget"></section>
+      <section class="widget" id="tripRequestWidget">
+        <h1>Discover Your Adventure</h1>
+        <h2>Travel Where You Want</h2>
+        <section class="travel-requester">
+          <label for="datepicker">Trip Duration:</label>
+          <input id="datepicker" name="datepicker">
+          <label for="travelerCount" type="number select">Number of Travelers:</label>
+          <input id="travelerCount" name="travelerCount" type="number" min="1">
+          <button id="destinationSelectButton">Select a Destination</button>
+        </section>
+      </section>
       <section class="widget" id="travelerTripsWidget"></section>
       <section class="widget" id="travelerCostsWidget"></section>
     </section>
@@ -50,6 +60,7 @@
   
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.umd.min.js"></script>
 
 </body>
 </html>
