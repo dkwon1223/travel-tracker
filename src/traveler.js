@@ -21,6 +21,7 @@ function getTripCost(trip) {
       return destination.id === trip.destinationID;
    })
    return {
+      destination: `${targetDestination.destination}`,
       flightCost: (trip.travelers * targetDestination.estimatedFlightCostPerPerson),
       lodgingCost: (trip.travelers * (targetDestination.estimatedLodgingCostPerDay * trip.duration)),
       tripCost: ((trip.travelers * targetDestination.estimatedFlightCostPerPerson) + (trip.travelers * (targetDestination.estimatedLodgingCostPerDay * trip.duration))),

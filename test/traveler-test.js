@@ -23,6 +23,7 @@ describe("Evaluate if traveler trip estimated cost behaves correctly", function(
         const exampleTrip = createTrip(210, 23, 1, 2, "2023/08/09", 4);
         const exampleTripCost = getTripCost(exampleTrip);
         expect(exampleTripCost).to.deep.equal({
+            destination: "Lima, Peru",
             flightCost: 800,
             lodgingCost: 560,
             tripCost: 1360,

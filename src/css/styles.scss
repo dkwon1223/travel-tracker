@@ -234,6 +234,19 @@ body,
     font-style: italic;
     margin-right: 2%;
   }
+  #estimatedCostFeedback {
+    text-align: center;
+    text-wrap: balance;
+    height: 30%;
+    strong {
+      width: 40%;
+    }
+  }
+  #confirmRequestTripButton {
+    background-color: green;
+    color: white;
+    font-weight: bolder;
+  }
 }
 
 .travel-input {
@@ -243,7 +256,8 @@ body,
 }
 
 #destinationSelectButton,
-#requestTripButton {
+#requestTripButton,
+#confirmRequestTripButton {
   @include button();
   height: 40%;
   width: 35%;
@@ -276,6 +290,8 @@ body,
     margin-bottom: 4%;
   }
 }
+
+
 
 
 

@@ -1,6 +1,6 @@
 import "./css/styles.scss"
 import { validateLogIn } from './login';
-import { createTrip, destinations } from "./traveler";
+import { createTrip, destinations, getTripCost } from "./traveler";
 import { fetchDestinations, fetchTrips } from "./apiCalls";
 import { easepick } from '@easepick/bundle';
 
@@ -21,6 +21,7 @@ const tripDateInput = document.querySelector("#datepicker");
 const tripTravelerCountInput = document.querySelector("#travelerCount");
 const tripDestinationInput = document.querySelector("#destinationID");
 const tripRequestFeedback = document.querySelector("#estimatedCostFeedback");
+const confirmTripRequestButton = document.querySelector("#confirmRequestTripButton");
 const tripsData = fetchTrips();
 const data = await tripsData;
 const trips = data.trips;
@@ -107,16 +108,22 @@ function handleTripRequest(event) {
         let splitDates = tripDateInput.value.replace(/\s/g, "").split("-");
         let reformattedDate = `${splitDates[0]}/${splitDates[1]}/${splitDates[2]}`;
         let requestedTrip = createTrip((tripsIDs.length+1), loggedInTraveler.id, parseInt(tripDestinationInput.value), parseInt(tripTravelerCountInput.value), reformattedDate, tripDuration);
-        console.log(requestedTrip);
-        let destinations = loadDestinations();
-        console.log(destinations);
-        // let targetDestination = destinations.find((destination) => {
-        //     destination.id === requestedTrip.destinationID;
-        // })
-        // console.log(targetDestination);
-        tripRequestFeedback.style.color = "green";
-        tripRequestFeedback.innerHTML = ``
+        getEstimatedCost(requestedTrip);
+        confirmTripRequestButton.classList.remove("hidden");
     }
+}
+
+function getEstimatedCost(trip) {
+    let requestedTripCost = getTripCost(trip);
+    tripRequestFeedback.style.color = "green";
+    tripRequestFeedback.innerHTML = `<strong>Your trip to ${requestedTripCost.destination} is estimated to have the following costs:</strong><br>
+    <aside>
+    Flights: $${requestedTripCost.flightCost}<br>
+    Lodging: $${requestedTripCost.lodgingCost}<br>
+    Total Cost: $${requestedTripCost.tripCost}<br>
+    Agent Fee(10%): $${requestedTripCost.agentFee}<br>
+    Total Cost with Agent Fee: $${requestedTripCost.totalCost}
+    </aside>`;
 }
 
 tripRequestForm.addEventListener("submit", handleTripRequest);
