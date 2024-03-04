@@ -1,5 +1,7 @@
+import { fetchDestinations } from "./apiCalls";
 import "./css/styles.scss"
 import { validateLogIn } from './login';
+import { easepick } from '@easepick/bundle';
 
 const loginPage = document.querySelector(".login-page");
 const logInButton = document.querySelector("#logInButton");
@@ -10,7 +12,7 @@ const loginErrorMessage = document.querySelector(".login-error-message");
 const travelerDashboard = document.querySelector(".traveler-dashboard");
 const userHeader = document.querySelector(".nav-user-info");
 const signOutButton = document.querySelector("#signOutButton");
-const destinationButton = document.querySelector("#destinationSelectButton");
+const destinationSelectButton = document.querySelector("#destinationSelectButton");
 const destinationContainer = document.querySelector(".vacation-destinations");
 const destinationCover = document.querySelector(".trip-request-cover");
 let loggedInTraveler;
@@ -46,10 +48,33 @@ signOutButton.addEventListener("click", () => {
     location.reload();
 })
 
-destinationButton.addEventListener("click", () => {
-    destinationContainer.classList.remove("hidden");
-    destinationCover.classList.add("hidden");
+destinationSelectButton.addEventListener("click", () => {
+    destinationContainer.classList.toggle("hidden");
+    destinationCover.classList.toggle("hidden");
+    loadDestinations();
 })
+
+async function loadDestinations() {
+    const destinationsData = fetchDestinations();
+    const data = await destinationsData;
+    const destinationsObject = data;
+    destinationsObject.destinations.forEach((destination) => {
+        let card = document.createElement("div")
+        card.setAttribute("class", "destination-card");
+        card.setAttribute("id", `${destination.id}`);
+        card.innerHTML = `<h4>${destination.destination}</h4><br>
+                        <img src=${destination.image} alt=${destination.alt}>
+                        <button id="targetDestinationButton">Select this Destination</button>`;
+        destinationContainer.appendChild(card);
+    })
+}
+
+destinationContainer.addEventListener("click", (event) => {
+    if(event.target.id === "targetDestinationButton") {
+        console.log(event.target.parentElement.id);
+    }
+})
+
 
 
 

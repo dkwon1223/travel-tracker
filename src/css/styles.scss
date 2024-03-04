@@ -183,21 +183,31 @@ body,
   @include flex-centered();
   height: 65%;
   width: 90%;
-  border: 2px solid black;
   border-radius: $rounded-border;
   background-color:rgba(255, 255, 255, 0.543);
+  #datepicker {
+    width: 40%;
+  }
+  #travelerCount {
+    width: 15%;
+  }
+  input {
+    text-align: center;
+  }
+  button:hover{
+    background-color: #6883bc;
+  }
 }
 
 .vacation-destinations {
   height: 100%;
   width: 60%;
-  border: 2px solid black;
+  overflow-y: auto;
 }
 
 .trip-request-cover {
   height: 100%;
   width: 60%;
-  border: 2px solid black;
   border-radius: 0 $rounded-border $rounded-border 0;
   background-image: url('../images/travel-cover-2.jpg');
   background-size: cover;
@@ -205,7 +215,6 @@ body,
 }
 
 .travel-inputs {
-  border: 2px solid black;
   height: 100%;
   width: 40%;
   @include flex-centered();
@@ -214,7 +223,8 @@ body,
     font-size: 200%;
     font-style: italic;
     font-weight: 200;
-    margin-bottom: 8%;
+    margin-bottom: 0;
+    margin-top: 0;
   }
   label {
     font-size: large;
@@ -225,7 +235,7 @@ body,
 
 .travel-input {
   @include flex-centered();
-  height: 20%;
+  height: 15%;
   width: 100%;
 }
 
@@ -234,6 +244,34 @@ body,
   @include button();
   height: 40%;
   width: 50%;
+}
+
+.destination-card {
+  @include flex-centered();
+  flex-direction: column;
+  border-radius: $rounded-border;
+  border: 2px solid rgba(109, 99, 185, 0.477);
+  margin-bottom: 5%;
+  margin-top: 5%;
+  height: 70%;
+  width: 95%;
+  h4 {
+    font-style: italic;
+    font-weight: 600;
+    font-size: larger;
+    margin-bottom: 0;
+  }
+  img {
+    height: 65%;
+    width: 80%;
+    margin-bottom: 5%;
+  }
+  #targetDestinationButton {
+    @include button();
+    height: 15%;
+    width: 30%;
+    margin-bottom: 4%;
+  }
 }
 
 

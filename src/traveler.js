@@ -11,4 +11,6 @@ function createTrip(tripID, userID, destinationID, travelerCount, date, duration
  }
 }
 
+
+
 export { createTrip }

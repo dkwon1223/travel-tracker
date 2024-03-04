@@ -46,7 +46,7 @@
         <h1>Discover Your Adventure</h1>
         <h2>Travel Where You Want</h2>
         <section class="travel-requester">
-          <div class="travel-inputs">
+          <form class="travel-inputs">
             <h3>Request Your Trip</h3>
             <div class="travel-input">
               <label for="datepicker">Trip Duration</label>
@@ -59,14 +59,14 @@
               <input id="travelerCount" name="travelerCount" type="number" min="1" required>
             </div>
             <div class="travel-input">
-              <button id="destinationSelectButton">Select a Destination</button>
+              <button id="destinationSelectButton" type="button">Select a Destination</button>
             </div>
             <div class="travel-input" id="estimatedCostFeedback">
             </div>
             <div class="travel-input">
               <button id="requestTripButton">Request Trip</button>
             </div>
-          </div>
+          </form>
           <div class="trip-request-cover"></div>
           <div class="vacation-destinations hidden"></div>
         </section>
@@ -79,7 +79,6 @@
       </section>
     </section>
   </section>
-  
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.umd.min.js"></script>
