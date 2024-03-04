@@ -71,7 +71,7 @@ function postTrip(trip) {
         return response.json();
     })
     .then(data => console.log(data))
-    .catch(error => console.log(error))
+    .catch(error => tripRequestFeedback.innerHTML = error.message)
 }
 
-export { fetchTravelersData, fetchTraveler, fetchDestinations, fetchTrips }
+export { fetchTravelersData, fetchTraveler, fetchDestinations, fetchTrips, postTrip }

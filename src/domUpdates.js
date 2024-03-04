@@ -1,7 +1,7 @@
 import "./css/styles.scss"
 import { validateLogIn } from './login';
 import { createTrip, destinations, getTripCost } from "./traveler";
-import { fetchDestinations, fetchTrips } from "./apiCalls";
+import { fetchTrips, postTrip } from "./apiCalls";
 import { easepick } from '@easepick/bundle';
 
 const loginPage = document.querySelector(".login-page");
@@ -28,7 +28,8 @@ const trips = data.trips;
 const tripsIDs = trips.map((trip) => {
     return trip.id;
 })
-let loggedInTraveler, tripDuration;
+let loggedInTraveler, tripDuration, requestedTrip;
+
 const picker = new easepick.create({
     element: document.getElementById('datepicker'),
     css: [
@@ -44,6 +45,55 @@ const picker = new easepick.create({
     }
 });
 
+async function loadDestinations() {
+    destinations.forEach((destination) => {
+        let card = document.createElement("div")
+        card.setAttribute("class", "destination-card");
+        card.setAttribute("id", `${destination.id}`);
+        card.innerHTML = `<h4>${destination.destination}</h4><br>
+                        <img src=${destination.image} alt=${destination.alt}>
+                        <button id="targetDestinationButton">Select this Destination</button>`;
+        destinationContainer.appendChild(card);
+    })
+    return destinations;
+}
+
+function handleTripRequest(event) {
+    event.preventDefault();
+    if(!tripDateInput.value) {
+        tripRequestFeedback.style.color = "red";
+        tripRequestFeedback.innerHTML = "Please select a trip duration!"
+    } else if(!tripTravelerCountInput.value) {
+        tripRequestFeedback.style.color = "red";
+        tripRequestFeedback.innerHTML = "Please select number of travelers!"
+    } else if(!tripDestinationInput.value) {
+        tripRequestFeedback.style.color = "red";
+        tripRequestFeedback.innerHTML = "Please select a destination!";
+    } else {
+        processTrip();
+        getEstimatedCost(requestedTrip);
+        confirmTripRequestButton.classList.remove("hidden");
+    }
+}
+
+function processTrip() {
+    let splitDates = tripDateInput.value.replace(/\s/g, "").split("-");
+    let reformattedDate = `${splitDates[0]}/${splitDates[1]}/${splitDates[2]}`;
+    requestedTrip = createTrip((tripsIDs.length+1), loggedInTraveler.id, parseInt(tripDestinationInput.value), parseInt(tripTravelerCountInput.value), reformattedDate, tripDuration);
+}
+
+function getEstimatedCost(trip) {
+    let requestedTripCost = getTripCost(trip);
+    tripRequestFeedback.style.color = "green";
+    tripRequestFeedback.innerHTML = `<strong>Your trip to ${requestedTripCost.destination} is estimated to have the following costs:</strong><br>
+    <aside>
+    Flights: $${Intl.NumberFormat("en-US").format(requestedTripCost.flightCost)}<br>
+    Lodging: $${Intl.NumberFormat("en-US").format(requestedTripCost.lodgingCost)}<br>
+    Total Cost: $${Intl.NumberFormat("en-US").format(requestedTripCost.tripCost)}<br>
+    Agent Fee(10%): $${Intl.NumberFormat("en-US").format(requestedTripCost.agentFee)}<br>
+    Total Cost with Agent Fee: $${Intl.NumberFormat("en-US").format(requestedTripCost.totalCost)}
+    </aside>`;
+}
 
 logInButton.addEventListener("click", () => {
     const username = usernameInput.value;
@@ -74,18 +124,6 @@ destinationSelectButton.addEventListener("click", () => {
     loadDestinations();
 })
 
-async function loadDestinations() {
-    destinations.forEach((destination) => {
-        let card = document.createElement("div")
-        card.setAttribute("class", "destination-card");
-        card.setAttribute("id", `${destination.id}`);
-        card.innerHTML = `<h4>${destination.destination}</h4><br>
-                        <img src=${destination.image} alt=${destination.alt}>
-                        <button id="targetDestinationButton">Select this Destination</button>`;
-        destinationContainer.appendChild(card);
-    })
-    return destinations;
-}
 
 destinationContainer.addEventListener("click", (event) => {
     if(event.target.id === "targetDestinationButton") {
@@ -93,41 +131,16 @@ destinationContainer.addEventListener("click", (event) => {
     }
 })
 
-function handleTripRequest(event) {
-    event.preventDefault();
-    if(!tripDateInput.value) {
-        tripRequestFeedback.style.color = "red";
-        tripRequestFeedback.innerHTML = "Please select a trip duration!"
-    } else if(!tripTravelerCountInput.value) {
-        tripRequestFeedback.style.color = "red";
-        tripRequestFeedback.innerHTML = "Please select number of travelers!"
-    } else if(!tripDestinationInput.value) {
-        tripRequestFeedback.style.color = "red";
-        tripRequestFeedback.innerHTML = "Please select a destination!";
-    } else {
-        let splitDates = tripDateInput.value.replace(/\s/g, "").split("-");
-        let reformattedDate = `${splitDates[0]}/${splitDates[1]}/${splitDates[2]}`;
-        let requestedTrip = createTrip((tripsIDs.length+1), loggedInTraveler.id, parseInt(tripDestinationInput.value), parseInt(tripTravelerCountInput.value), reformattedDate, tripDuration);
-        getEstimatedCost(requestedTrip);
-        confirmTripRequestButton.classList.remove("hidden");
-    }
-}
-
-function getEstimatedCost(trip) {
-    let requestedTripCost = getTripCost(trip);
-    tripRequestFeedback.style.color = "green";
-    tripRequestFeedback.innerHTML = `<strong>Your trip to ${requestedTripCost.destination} is estimated to have the following costs:</strong><br>
-    <aside>
-    Flights: $${requestedTripCost.flightCost}<br>
-    Lodging: $${requestedTripCost.lodgingCost}<br>
-    Total Cost: $${requestedTripCost.tripCost}<br>
-    Agent Fee(10%): $${requestedTripCost.agentFee}<br>
-    Total Cost with Agent Fee: $${requestedTripCost.totalCost}
-    </aside>`;
-}
-
 tripRequestForm.addEventListener("submit", handleTripRequest);
 
+confirmTripRequestButton.addEventListener("click", () => {
+    postTrip(requestedTrip);
+    tripRequestFeedback.style.color = "green";
+    tripRequestFeedback.innerHTML = `<strong>Your Trip Request has been completed successfully! Please wait while we update your portal...</strong>`
+    setTimeout(() => {
+        location.reload();
+    }, "2000");
+})
 
 
 
