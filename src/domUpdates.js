@@ -30,6 +30,10 @@ const tripsIDs = trips.map((trip) => {
 })
 let loggedInTraveler, tripDuration, requestedTrip;
 
+if(document.readyState === "complete" && sessionStorage.getItem("loggedInTraveler") !== null) {
+    renderTravelerDashboard();
+} 
+
 const picker = new easepick.create({
     element: document.getElementById('datepicker'),
     css: [
@@ -44,6 +48,13 @@ const picker = new easepick.create({
         }
     }
 });
+
+function renderTravelerDashboard() {
+    loginPage.classList.add("hidden");
+    travelerDashboard.classList.remove("hidden");
+    loggedInTraveler = JSON.parse(sessionStorage.getItem("loggedInTraveler"));
+    userHeader.innerHTML += `${loggedInTraveler.name} the ${loggedInTraveler.travelerType} <br> UserID: ${loggedInTraveler.id}`;
+}
 
 async function loadDestinations() {
     destinations.forEach((destination) => {
@@ -102,10 +113,7 @@ logInButton.addEventListener("click", () => {
         loginErrorMessage.style.color = "green";
         loginErrorMessage.innerHTML = validateLogIn(username, password);
         setTimeout(() => {
-            loginPage.classList.add("hidden");
-            travelerDashboard.classList.remove("hidden");
-            loggedInTraveler = JSON.parse(sessionStorage.getItem("loggedInTraveler"));
-            userHeader.innerHTML += `${loggedInTraveler.name} the ${loggedInTraveler.travelerType} <br> UserID: ${loggedInTraveler.id}`;
+            renderTravelerDashboard();
         }, "2000");
     } else {
         loginErrorMessage.style.color = "red";
