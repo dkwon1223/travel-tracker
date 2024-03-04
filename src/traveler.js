@@ -1,3 +1,8 @@
+import { fetchDestinations } from "./apiCalls";
+const destinationsData = fetchDestinations();
+const data = await destinationsData;
+const destinations = data.destinations;
+
 function createTrip(tripID, userID, destinationID, travelerCount, date, duration) {
  return {
     id: tripID,
@@ -11,6 +16,19 @@ function createTrip(tripID, userID, destinationID, travelerCount, date, duration
  }
 }
 
+function getTripCost(trip) {
+   const targetDestination = destinations.find((destination) => {
+      return destination.id === trip.destinationID;
+   })
+   return {
+      flightCost: (trip.travelers * targetDestination.estimatedFlightCostPerPerson),
+      lodgingCost: (trip.travelers * (targetDestination.estimatedLodgingCostPerDay * trip.duration)),
+      tripCost: ((trip.travelers * targetDestination.estimatedFlightCostPerPerson) + (trip.travelers * (targetDestination.estimatedLodgingCostPerDay * trip.duration))),
+      agentFee: Math.round(((trip.travelers * targetDestination.estimatedFlightCostPerPerson) + (trip.travelers * (targetDestination.estimatedLodgingCostPerDay * trip.duration))) * 0.1),
+      totalCost: Math.round(((trip.travelers * targetDestination.estimatedFlightCostPerPerson) + (trip.travelers * (targetDestination.estimatedLodgingCostPerDay * trip.duration))) * 1.1)
+   }
+}
 
 
-export { createTrip }
+
+export { destinations, createTrip, getTripCost }

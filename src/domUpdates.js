@@ -1,6 +1,6 @@
 import "./css/styles.scss"
 import { validateLogIn } from './login';
-import { createTrip } from "./traveler";
+import { createTrip, destinations } from "./traveler";
 import { fetchDestinations, fetchTrips } from "./apiCalls";
 import { easepick } from '@easepick/bundle';
 
@@ -74,10 +74,7 @@ destinationSelectButton.addEventListener("click", () => {
 })
 
 async function loadDestinations() {
-    const destinationsData = fetchDestinations();
-    const data = await destinationsData;
-    const destinationsObject = data;
-    destinationsObject.destinations.forEach((destination) => {
+    destinations.forEach((destination) => {
         let card = document.createElement("div")
         card.setAttribute("class", "destination-card");
         card.setAttribute("id", `${destination.id}`);
@@ -86,6 +83,7 @@ async function loadDestinations() {
                         <button id="targetDestinationButton">Select this Destination</button>`;
         destinationContainer.appendChild(card);
     })
+    return destinations;
 }
 
 destinationContainer.addEventListener("click", (event) => {
@@ -108,10 +106,16 @@ function handleTripRequest(event) {
     } else {
         let splitDates = tripDateInput.value.replace(/\s/g, "").split("-");
         let reformattedDate = `${splitDates[0]}/${splitDates[1]}/${splitDates[2]}`;
-        console.log(reformattedDate);
-        console.log(tripDuration);
-        console.log(tripsIDs.length);
-        console.log(createTrip((tripsIDs.length+1), loggedInTraveler.id, tripDestinationInput.value, tripTravelerCountInput.value, reformattedDate, tripDuration));
+        let requestedTrip = createTrip((tripsIDs.length+1), loggedInTraveler.id, parseInt(tripDestinationInput.value), parseInt(tripTravelerCountInput.value), reformattedDate, tripDuration);
+        console.log(requestedTrip);
+        let destinations = loadDestinations();
+        console.log(destinations);
+        // let targetDestination = destinations.find((destination) => {
+        //     destination.id === requestedTrip.destinationID;
+        // })
+        // console.log(targetDestination);
+        tripRequestFeedback.style.color = "green";
+        tripRequestFeedback.innerHTML = ``
     }
 }
 
