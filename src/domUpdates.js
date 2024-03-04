@@ -1,6 +1,7 @@
-import { fetchDestinations } from "./apiCalls";
 import "./css/styles.scss"
 import { validateLogIn } from './login';
+import { createTrip } from "./traveler";
+import { fetchDestinations, fetchTrips } from "./apiCalls";
 import { easepick } from '@easepick/bundle';
 
 const loginPage = document.querySelector(".login-page");
@@ -15,13 +16,31 @@ const signOutButton = document.querySelector("#signOutButton");
 const destinationSelectButton = document.querySelector("#destinationSelectButton");
 const destinationContainer = document.querySelector(".vacation-destinations");
 const destinationCover = document.querySelector(".trip-request-cover");
-let loggedInTraveler;
+const tripRequestForm = document.querySelector(".travel-inputs");
+const tripDateInput = document.querySelector("#datepicker");
+const tripTravelerCountInput = document.querySelector("#travelerCount");
+const tripDestinationInput = document.querySelector("#destinationID");
+const tripRequestFeedback = document.querySelector("#estimatedCostFeedback");
+const tripsData = fetchTrips();
+const data = await tripsData;
+const trips = data.trips;
+const tripsIDs = trips.map((trip) => {
+    return trip.id;
+})
+let loggedInTraveler, tripDuration;
 const picker = new easepick.create({
     element: document.getElementById('datepicker'),
     css: [
       'https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css',
     ],
-    plugins: ['RangePlugin']
+    plugins: ['RangePlugin'],
+    RangePlugin: {
+        tooltip: true,
+        tooltipNumber(num) {
+            tripDuration = num - 1;
+            return num - 1;
+        }
+    }
 });
 
 
@@ -71,9 +90,32 @@ async function loadDestinations() {
 
 destinationContainer.addEventListener("click", (event) => {
     if(event.target.id === "targetDestinationButton") {
-        console.log(event.target.parentElement.id);
+        tripDestinationInput.value = event.target.parentElement.id;
     }
 })
+
+function handleTripRequest(event) {
+    event.preventDefault();
+    if(!tripDateInput.value) {
+        tripRequestFeedback.style.color = "red";
+        tripRequestFeedback.innerHTML = "Please select a trip duration!"
+    } else if(!tripTravelerCountInput.value) {
+        tripRequestFeedback.style.color = "red";
+        tripRequestFeedback.innerHTML = "Please select number of travelers!"
+    } else if(!tripDestinationInput.value) {
+        tripRequestFeedback.style.color = "red";
+        tripRequestFeedback.innerHTML = "Please select a destination!";
+    } else {
+        let splitDates = tripDateInput.value.replace(/\s/g, "").split("-");
+        let reformattedDate = `${splitDates[0]}/${splitDates[1]}/${splitDates[2]}`;
+        console.log(reformattedDate);
+        console.log(tripDuration);
+        console.log(tripsIDs.length);
+        console.log(createTrip((tripsIDs.length+1), loggedInTraveler.id, tripDestinationInput.value, tripTravelerCountInput.value, reformattedDate, tripDuration));
+    }
+}
+
+tripRequestForm.addEventListener("submit", handleTripRequest);
 
 
 

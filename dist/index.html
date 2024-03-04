@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 </head>
 <body>
-  <section class="login-page hidden">
+  <section class="login-page">
     <form class="login-form" type="submit">
       <div class="login-image">
       </div>
@@ -32,7 +32,7 @@
       </div>
     </form>
   </section>
-  <section class="traveler-dashboard">
+  <section class="traveler-dashboard hidden">
     <nav class="traveler-dashboard-nav">
       <img src="./images/travel-icon.svg" alt="Icon of plane flying around globe" id="travelIcon">
       <h1 class="nav-user-info"><img src="./images/user-icon.svg" alt="white user icon of person silhouette" id="userIconNav"></h1>
@@ -51,20 +51,23 @@
             <div class="travel-input">
               <label for="datepicker">Trip Duration</label>
               <box-icon name='calendar'></box-icon>
-              <input id="datepicker" name="datepicker" required>
+              <input id="datepicker" name="datepicker"/>
             </div>
             <div class="travel-input">
               <label for="travelerCount" type="number select">Number of Travelers</label>
               <box-icon name='group'></box-icon>
-              <input id="travelerCount" name="travelerCount" type="number" min="1" required>
+              <input id="travelerCount" name="travelerCount" type="number" min="1"/>
             </div>
             <div class="travel-input">
               <button id="destinationSelectButton" type="button">Select a Destination</button>
+              <label for="destinationID">Destination ID</label>
+              <box-icon type='solid' name='map'></box-icon>
+              <input name="destinationID" type="number" id="destinationID" readonly/>
             </div>
             <div class="travel-input" id="estimatedCostFeedback">
             </div>
             <div class="travel-input">
-              <button id="requestTripButton">Request Trip</button>
+              <button id="requestTripButton" type="submit">Request Trip</button>
             </div>
           </form>
           <div class="trip-request-cover"></div>

@@ -191,6 +191,9 @@ body,
   #travelerCount {
     width: 15%;
   }
+  #destinationID {
+    width: 15%;
+  }
   input {
     text-align: center;
   }
@@ -243,7 +246,7 @@ body,
 #requestTripButton {
   @include button();
   height: 40%;
-  width: 50%;
+  width: 35%;
 }
 
 .destination-card {

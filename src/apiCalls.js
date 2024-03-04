@@ -43,5 +43,20 @@ function fetchDestinations() {
         .catch(error => console.log(error));
 }
 
+function fetchTrips() {
+    return fetch('http://localhost:3001/api/v1/trips')
+        .then(response => {
+            if(!response.ok) {
+                throw new Error("There was a problem retrieving the data. Please try again");
+            }
+            return response.json();
+        })
+        .then(data => {
+            let tripsData = data;
+            return tripsData;
+        })
+        .catch(error => console.log(error));
+}
 
-export { fetchTravelersData, fetchTraveler, fetchDestinations }
+
+export { fetchTravelersData, fetchTraveler, fetchDestinations, fetchTrips }
