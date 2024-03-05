@@ -82,7 +82,7 @@ function loadDestinations() {
         card.setAttribute("id", `${destination.id}`);
         card.innerHTML = `<h4>${destination.destination}</h4><br>
                         <img src=${destination.image} alt=${destination.alt}>
-                        <button id="targetDestinationButton" tabindex="10">Select this Destination</button>`;
+                        <button id="targetDestinationButton" tabindex="10" aria-label="Select destination ${destination.destination}">Select this Destination</button>`;
         destinationContainer.appendChild(card);
     })
     return destinations;
@@ -207,6 +207,7 @@ function loadTripYears() {
     years.forEach((year) => {
         let yearButton = document.createElement("button");
         yearButton.setAttribute("class", "year-button");
+        yearButton.setAttribute("aria-label", `Access trips from year ${year}`);
         yearButton.setAttribute("id", `${year}`);
         yearButton.setAttribute("tabindex", 19  );    
         yearButton.innerText = `${year}`;

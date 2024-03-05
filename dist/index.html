@@ -36,10 +36,10 @@
     <nav class="traveler-dashboard-nav">
       <img src="./images/travel-icon.svg" alt="Icon of plane flying around globe" id="travelIcon">
       <h1 class="nav-user-info"><img src="./images/user-icon.svg" alt="white user icon of person silhouette" id="userIconNav"></h1>
-      <button class="nav-button" id="requestTripButtonNav" tabindex="4">Request a Trip</button>
-      <button class="nav-button" id="yourTripsButtonNav" tabindex="5">Your Trips</button>
-      <button class="nav-button" id="yourSpendingButtonNav" tabindex="6">Your Spending</button>
-      <button class="nav-button" id="signOutButton" tabindex="7">Sign Out</button>
+      <button class="nav-button" id="requestTripButtonNav" tabindex="4" aria-label="Go To Trip Request Area">Request a Trip</button>
+      <button class="nav-button" id="yourTripsButtonNav" tabindex="5" aria-label="Go to Your Trips">Your Trips</button>
+      <button class="nav-button" id="yourSpendingButtonNav" tabindex="6" aria-label="Go to Trip Spending">Your Spending</button>
+      <button class="nav-button" id="signOutButton" tabindex="7" aria-label="Log Out">Sign Out</button>
     </nav>
     <section class="traveler-dashboard-widgets">
       <section class="widget" id="tripRequestWidget">
@@ -80,11 +80,11 @@
         <section class="trip-lister-container">
           <section class="trip-lister">
             <h2>Past Trips</h2>
-            <div class="trip-list" id="pastTripsContainer" tabindex="16"></div>
+            <div class="trip-list" id="pastTripsContainer" tabindex="16" aria-label="List of Past Trips"></div>
           </section>
           <section class="trip-lister">
             <h2>Upcoming Trips</h2>
-            <div class="trip-list" id="upcomingTripsContainer" tabindex="18"></div>
+            <div class="trip-list" id="upcomingTripsContainer" tabindex="18" aria-label="List of Upcoming Trips"></div>
           </section>
         </section>
       </section>
