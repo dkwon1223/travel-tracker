@@ -9,7 +9,6 @@ const logInButton = document.querySelector("#logInButton");
 const usernameInput = document.querySelector("#usernameInput");
 const passwordInput = document.querySelector("#passwordInput");
 const loginErrorMessage = document.querySelector(".login-error-message");
-
 const travelerDashboard = document.querySelector(".traveler-dashboard");
 const userHeader = document.querySelector(".nav-user-info");
 const signOutButton = document.querySelector("#signOutButton");
@@ -22,13 +21,22 @@ const tripTravelerCountInput = document.querySelector("#travelerCount");
 const tripDestinationInput = document.querySelector("#destinationID");
 const tripRequestFeedback = document.querySelector("#estimatedCostFeedback");
 const confirmTripRequestButton = document.querySelector("#confirmRequestTripButton");
+const pastTripsContainer = document.querySelector("#pastTripsContainer");
+const upcomingTripsContainer = document.querySelector("#upcomingTripsContainer");
 const tripsData = fetchTrips();
 const data = await tripsData;
 const trips = data.trips;
 const tripsIDs = trips.map((trip) => {
     return trip.id;
 })
+const today = new Date();
 let loggedInTraveler, tripDuration, requestedTrip;
+
+if(document.readyState === "complete" && sessionStorage.getItem("loggedInTraveler") !== null) {
+    renderTravelerDashboard();
+    loadPastTrips();
+    loadUpcomingTrips();
+} 
 
 const picker = new easepick.create({
     element: document.getElementById('datepicker'),
@@ -45,9 +53,16 @@ const picker = new easepick.create({
     }
 });
 
+function renderTravelerDashboard() {
+    loginPage.classList.add("hidden");
+    travelerDashboard.classList.remove("hidden");
+    loggedInTraveler = JSON.parse(sessionStorage.getItem("loggedInTraveler"));
+    userHeader.innerHTML += `${loggedInTraveler.name} the ${loggedInTraveler.travelerType} <br> UserID: ${loggedInTraveler.id}`;
+}
+
 async function loadDestinations() {
     destinations.forEach((destination) => {
-        let card = document.createElement("div")
+        let card = document.createElement("div");
         card.setAttribute("class", "destination-card");
         card.setAttribute("id", `${destination.id}`);
         card.innerHTML = `<h4>${destination.destination}</h4><br>
@@ -57,6 +72,67 @@ async function loadDestinations() {
     })
     return destinations;
 }
+
+async function loadPastTrips() {
+    let allTrips = trips.reduce((acc, trip) => {
+        if(trip.userID === loggedInTraveler.id) {
+            acc.push(trip);
+        }
+        return acc;
+    }, []);
+    let pastTrips = allTrips.filter((trip) => {
+        let tripDate = new Date(trip.date);
+        return tripDate < today;
+    });
+    pastTrips.forEach((trip) => {
+        let card = document.createElement("div");
+        card.setAttribute("class", "past-trip-card");
+        let destinationName = destinations.find((destination) => {
+            return destination.id === trip.destinationID;
+        }).destination;
+        let destinationPic = destinations.find((destination) => {
+            return destination.id === trip.destinationID;
+        }).image;
+        card.innerHTML = `<h3>Trip to ${destinationName} on ${trip.date}</h3><br>
+                        <img src=${destinationPic} alt="stock photo of ${destinationName}"/>`;
+        pastTripsContainer.appendChild(card);
+    })
+}
+
+async function loadUpcomingTrips() {
+    let allTrips = trips.reduce((acc, trip) => {
+        if(trip.userID === loggedInTraveler.id) {
+            acc.push(trip);
+        }
+        return acc;
+    }, []);
+    let upcomingTrips = allTrips.filter((trip) => {
+        let tripDate = new Date(trip.date);
+        return tripDate > today;
+    });
+    upcomingTrips.forEach((trip) => {
+        let card = document.createElement("div");
+        card.setAttribute("class", "upcoming-trip-card");
+        let destinationName = destinations.find((destination) => {
+            return destination.id === trip.destinationID;
+        }).destination;
+        let destinationPic = destinations.find((destination) => {
+            return destination.id === trip.destinationID;
+        }).image;
+        if(trip.status === "pending") {
+            card.innerHTML = `<h3>Upcoming Trip to ${destinationName} on ${trip.date}</h3><br>
+                        <img src=${destinationPic} alt="stock photo of ${destinationName}"/><br>
+                        <h4>Status: <strong>${trip.status.toUpperCase()}</strong></h4>`;
+        } else {
+            card.innerHTML = `<h3>Upcoming Trip to ${destinationName} on ${trip.date}</h3><br>
+                        <img src=${destinationPic} alt="stock photo of ${destinationName}"/><br>
+                        <h4>Status: <span>${trip.status.toUpperCase()}</span></h4>`;
+        }
+        
+        upcomingTripsContainer.appendChild(card);
+    })
+}
+
 
 function handleTripRequest(event) {
     event.preventDefault();
@@ -102,10 +178,9 @@ logInButton.addEventListener("click", () => {
         loginErrorMessage.style.color = "green";
         loginErrorMessage.innerHTML = validateLogIn(username, password);
         setTimeout(() => {
-            loginPage.classList.add("hidden");
-            travelerDashboard.classList.remove("hidden");
-            loggedInTraveler = JSON.parse(sessionStorage.getItem("loggedInTraveler"));
-            userHeader.innerHTML += `${loggedInTraveler.name} the ${loggedInTraveler.travelerType} <br> UserID: ${loggedInTraveler.id}`;
+            renderTravelerDashboard();
+            loadPastTrips();
+            loadUpcomingTrips();
         }, "2000");
     } else {
         loginErrorMessage.style.color = "red";

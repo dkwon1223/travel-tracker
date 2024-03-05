@@ -11,6 +11,5 @@ import './images/user-icon.svg';
 import './domUpdates';
 import 'boxicons';
 
-console.log('This is the JavaScript entry file - your code begins here.');
 
 
