@@ -65,7 +65,7 @@ const picker = new easepick.create({
         unitIndex: 14    
     },
     LockPlugin: {
-        minDate: today 
+        minDate: today.setDate(today.getDate() + 1)
     }  
 });
 
