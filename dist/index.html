@@ -36,14 +36,14 @@
     <nav class="traveler-dashboard-nav">
       <img src="./images/travel-icon.svg" alt="Icon of plane flying around globe" id="travelIcon">
       <h1 class="nav-user-info"><img src="./images/user-icon.svg" alt="white user icon of person silhouette" id="userIconNav"></h1>
-      <button class="nav-button">Request a Trip</button>
-      <button class="nav-button">Your Trips</button>
-      <button class="nav-button">Your Costs</button>
+      <button class="nav-button" id="requestTripButtonNav">Request a Trip</button>
+      <button class="nav-button" id="yourTripsButtonNav">Your Trips</button>
+      <button class="nav-button" id="yourSpendingButtonNav">Your Spending</button>
       <button class="nav-button" id="signOutButton">Sign Out</button>
     </nav>
     <section class="traveler-dashboard-widgets">
       <section class="widget" id="tripRequestWidget">
-        <h1>Discover Your Adventure</h1>
+        <h1 id="tripRequestHeader">Discover Your Adventure</h1>
         <h2>Travel Where You Want</h2>
         <section class="travel-requester">
           <form class="travel-inputs">
@@ -76,7 +76,7 @@
         </section>
       </section>
       <section class="widget" id="travelerTripsWidget">
-        <h1>Your Trips</h1>
+        <h1 id="yourTripsHeader">Your Trips</h1>
         <section class="trip-lister-container">
           <section class="trip-lister">
             <h2>Past Trips</h2>
@@ -89,7 +89,7 @@
         </section>
       </section>
       <section class="widget" id="travelerCostsWidget">
-        <h1>Your Spending</h1>
+        <h1 id="yourSpendingHeader">Your Spending</h1>
         <section class="year-buttons"></section>
         <div class="spending-list"></div>
         <section class="total-spent">

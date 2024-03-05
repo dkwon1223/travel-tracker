@@ -11,7 +11,13 @@ const passwordInput = document.querySelector("#passwordInput");
 const loginErrorMessage = document.querySelector(".login-error-message");
 const travelerDashboard = document.querySelector(".traveler-dashboard");
 const userHeader = document.querySelector(".nav-user-info");
+const requestTripButton = document.querySelector("#requestTripButtonNav");
+const yourTripsButton = document.querySelector("#yourTripsButtonNav");
+const yourSpendingButton = document.querySelector("#yourSpendingButtonNav");
 const signOutButton = document.querySelector("#signOutButton");
+const tripRequestHeader = document.querySelector("#tripRequestHeader");
+const yourTripsHeader = document.querySelector("#yourTripsHeader");
+const yourSpendingHeader = document.querySelector("#yourSpendingHeader");
 const destinationSelectButton = document.querySelector("#destinationSelectButton");
 const destinationContainer = document.querySelector(".vacation-destinations");
 const destinationCover = document.querySelector(".trip-request-cover");
@@ -251,6 +257,27 @@ logInButton.addEventListener("click", () => {
         loginErrorMessage.style.color = "red";
         loginErrorMessage.innerHTML = validateLogIn(username, password);
     }
+});
+
+requestTripButton.addEventListener("click", () => {
+    window.scrollTo({
+        behavior: "smooth",
+        top: 30
+    });
+});
+
+yourTripsButton.addEventListener("click", () => {
+    window.scrollTo({
+        behavior: "smooth",
+        top: 862
+    });
+});
+
+yourSpendingButton.addEventListener("click", () => {
+    window.scrollTo({
+        behavior: "smooth",
+        top: 1700
+    });
 });
 
 signOutButton.addEventListener("click", () => {
