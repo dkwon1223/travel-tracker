@@ -144,7 +144,6 @@ body,
   flex-direction: column;
   height: 28%;
   width: 90%;
-  border: 2px solid black;
   border-radius: $rounded-border;
   margin-bottom: 5%;
   background-color:rgba(255, 255, 255, 0.285);
@@ -289,17 +288,19 @@ body,
 
 .trip-lister-container {
   @include flex-centered();
-  height: 70%;
-  width: 90%;
+  height: 80%;
+  width: 100%;
 }
 
 .trip-lister {
+  background-color:rgba(255, 255, 255, 0.543);
   @include flex-centered();
   flex-direction: column;
-  border: 2px solid black;
   border-radius: $rounded-border;
   height: 100%;
   width: 50%;
+  margin-right: 5%;
+  margin-left: 5%;
   h2 {
     margin-top: 0;
     font-size: x-large;
@@ -340,6 +341,41 @@ body,
   }
   span {
     color: rgb(21, 192, 21);
+  }
+}
+
+.year-buttons {
+  @include flex-centered();
+  justify-content: space-evenly;
+  height: 10%;
+  width: 80%;
+  .year-button {
+    @include button();
+    width: 15%;
+    height: 50%;
+  }
+  .year-button:hover {
+    background-color: #6883bc;
+  }
+}
+
+.spending-list {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: $rounded-border;
+  background-color:rgba(255, 255, 255, 0.543);
+  height: 60%;
+  width: 80%;
+  overflow-y: auto;
+  .trip-spending-card {
+    border: 2px solid rgba(38, 9, 62, 0.373);
+    border-radius: $rounded-border;
+    height: 70%;
+    width: 95%;
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 2%;
   }
 }
 

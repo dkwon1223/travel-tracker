@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 </head>
 <body>
-  <section class="login-page hidden">
+  <section class="login-page">
     <form class="login-form" type="submit">
       <div class="login-image">
       </div>
@@ -32,7 +32,7 @@
       </div>
     </form>
   </section>
-  <section class="traveler-dashboard">
+  <section class="traveler-dashboard hidden">
     <nav class="traveler-dashboard-nav">
       <img src="./images/travel-icon.svg" alt="Icon of plane flying around globe" id="travelIcon">
       <h1 class="nav-user-info"><img src="./images/user-icon.svg" alt="white user icon of person silhouette" id="userIconNav"></h1>
@@ -89,13 +89,14 @@
         </section>
       </section>
       <section class="widget" id="travelerCostsWidget">
-        <h1>Your Vacation Spending</h1>
+        <h1>Your Spending</h1>
+        <section class="year-buttons"></section>
+        <div class="spending-list"></div>
       </section>
     </section>
   </section>
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.umd.min.js"></script>
-
 </body>
 </html>
