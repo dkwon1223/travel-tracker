@@ -372,7 +372,7 @@ body,
   .trip-spending-card {
     border: 2px solid rgba(38, 9, 62, 0.373);
     border-radius: $rounded-border;
-    height: 70%;
+    height: 35%;
     width: 95%;
     text-align: center;
     margin-top: 5%;
@@ -387,11 +387,11 @@ body,
   background-color:rgba(255, 255, 255, 0.543);
   margin-bottom: 3%;
   border-radius: $rounded-border;
-  h5 {
+  h2 {
     height: 50%;
     width: 40%;
     text-align: center;
-    font-size: x-large;
+    font-size: xx-large;
   }
 }
 

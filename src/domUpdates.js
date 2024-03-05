@@ -15,14 +15,12 @@ const requestTripButton = document.querySelector("#requestTripButtonNav");
 const yourTripsButton = document.querySelector("#yourTripsButtonNav");
 const yourSpendingButton = document.querySelector("#yourSpendingButtonNav");
 const signOutButton = document.querySelector("#signOutButton");
-const tripRequestHeader = document.querySelector("#tripRequestHeader");
-const yourTripsHeader = document.querySelector("#yourTripsHeader");
-const yourSpendingHeader = document.querySelector("#yourSpendingHeader");
 const destinationSelectButton = document.querySelector("#destinationSelectButton");
 const destinationContainer = document.querySelector(".vacation-destinations");
 const destinationCover = document.querySelector(".trip-request-cover");
 const tripRequestForm = document.querySelector(".travel-inputs");
 const tripDateInput = document.querySelector("#datepicker");
+const tripDateDiv = document.querySelector("#travelInput");
 const tripTravelerCountInput = document.querySelector("#travelerCount");
 const tripDestinationInput = document.querySelector("#destinationID");
 const tripRequestFeedback = document.querySelector("#estimatedCostFeedback");
@@ -41,6 +39,7 @@ const tripsIDs = trips.map((trip) => {
 const today = new Date();
 let loggedInTraveler, tripDuration, requestedTrip;
 
+
 if(document.readyState === "complete" && sessionStorage.getItem("loggedInTraveler") !== null) {
     renderTravelerDashboard();
     loadPastTrips();
@@ -53,15 +52,21 @@ const picker = new easepick.create({
     css: [
       'https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css',
     ],
-    plugins: ['RangePlugin'],
+    plugins: ['RangePlugin', 'KbdPlugin'],
     RangePlugin: {
         tooltip: true,
         tooltipNumber(num) {
             tripDuration = num - 1;
-            return num - 1;
+            return num - 1; 
         }
-    }
+    },
+    KbdPlugin: {
+        dayIndex: 13,
+        unitIndex: 14    
+    }  
 });
+
+
 
 function renderTravelerDashboard() {
     loginPage.classList.add("hidden");
@@ -77,7 +82,7 @@ function loadDestinations() {
         card.setAttribute("id", `${destination.id}`);
         card.innerHTML = `<h4>${destination.destination}</h4><br>
                         <img src=${destination.image} alt=${destination.alt}>
-                        <button id="targetDestinationButton">Select this Destination</button>`;
+                        <button id="targetDestinationButton" tabindex="10">Select this Destination</button>`;
         destinationContainer.appendChild(card);
     })
     return destinations;
@@ -134,6 +139,7 @@ function loadPastTrips() {
     pastTrips.forEach((trip) => {
         let card = document.createElement("div");
         card.setAttribute("class", "past-trip-card");
+        card.setAttribute("tabindex", 17);
         let destinationName = destinations.find((destination) => {
             return destination.id === trip.destinationID;
         }).destination;
@@ -160,6 +166,7 @@ function loadUpcomingTrips() {
     upcomingTrips.forEach((trip) => {
         let card = document.createElement("div");
         card.setAttribute("class", "upcoming-trip-card");
+        card.setAttribute("tabindex", 19);
         let destinationName = destinations.find((destination) => {
             return destination.id === trip.destinationID;
         }).destination;
@@ -201,6 +208,7 @@ function loadTripYears() {
         let yearButton = document.createElement("button");
         yearButton.setAttribute("class", "year-button");
         yearButton.setAttribute("id", `${year}`);
+        yearButton.setAttribute("tabindex", 19  );    
         yearButton.innerText = `${year}`;
         yearButtonsSection.appendChild(yearButton);
     });
@@ -241,6 +249,22 @@ function loadTripsSpending(year) {
     totalSpent.innerHTML = `$${Intl.NumberFormat("en-US").format(sum)}`;
 }
 
+function formatShadowDOM() {
+    const spans = document.querySelectorAll("span");
+    let spansArray = Array.from(spans);
+    let calendarOpener = spansArray.find((span) => {
+        return span.id !== "cvd_extension_svg_filter" && !span.classList.contains("easepick-wrapper");
+    })
+    let calendar = spansArray.find((span) => {
+        return span.classList.contains("easepick-wrapper");
+    })
+    calendar.setAttribute("tabindex", 13);
+    calendarOpener.style.position = "initial";
+    calendarOpener.setAttribute("tabindex", 11);    
+    console.log(calendarOpener.shadowRoot.querySelector("button"));
+    let difficultButton = calendarOpener.shadowRoot.querySelector("button");
+    difficultButton.setAttribute("tabindex", 12)
+}
 
 logInButton.addEventListener("click", () => {
     const username = usernameInput.value;
@@ -252,6 +276,7 @@ logInButton.addEventListener("click", () => {
             renderTravelerDashboard();
             loadPastTrips();
             loadUpcomingTrips();
+            loadTripYears();
         }, "2000");
     } else {
         loginErrorMessage.style.color = "red";
@@ -314,7 +339,10 @@ yearButtonsSection.addEventListener("click", (event) => {
         console.log(event.target.id);
         loadTripsSpending(parseInt(event.target.id));
     }
-})
+});
+
+formatShadowDOM();
+
 
 
 
