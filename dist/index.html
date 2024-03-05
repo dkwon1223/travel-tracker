@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 </head>
 <body>
-  <section class="login-page hidden">
+  <section class="login-page">
     <form class="login-form" type="submit">
       <div class="login-image">
       </div>
@@ -20,82 +20,87 @@
         <div class="login-input">
           <label for="usernameInput" class="login-label">Username:</label>
           <box-icon class="login-icons"type='solid' name='user'></box-icon>
-          <input name="username" type="text" class="login-input" id="usernameInput" required>
+          <input name="username" type="text" class="login-input" id="usernameInput" required tabindex="1">
         </div>
         <div class="login-input">
           <label for="passwordInput" class="login-label">Password:</label>
           <box-icon class="login-icons" type='solid' name='lock-alt'></box-icon>
-          <input name="password" type="password" class="login-input" id="passwordInput" required>
+          <input name="password" type="password" class="login-input" id="passwordInput" required tabindex="2">
         </div>
-        <button id="logInButton" type="button">Log In</button>
+        <button id="logInButton" type="button" tabindex="3">Log In</button>
         <p class="login-error-message"></p>
       </div>
     </form>
   </section>
-  <section class="traveler-dashboard">
+  <section class="traveler-dashboard hidden">
     <nav class="traveler-dashboard-nav">
       <img src="./images/travel-icon.svg" alt="Icon of plane flying around globe" id="travelIcon">
       <h1 class="nav-user-info"><img src="./images/user-icon.svg" alt="white user icon of person silhouette" id="userIconNav"></h1>
-      <button class="nav-button">Request a Trip</button>
-      <button class="nav-button">Your Trips</button>
-      <button class="nav-button">Your Costs</button>
-      <button class="nav-button" id="signOutButton">Sign Out</button>
+      <button class="nav-button" id="requestTripButtonNav" tabindex="4" aria-label="Go To Trip Request Area">Request a Trip</button>
+      <button class="nav-button" id="yourTripsButtonNav" tabindex="5" aria-label="Go to Your Trips">Your Trips</button>
+      <button class="nav-button" id="yourSpendingButtonNav" tabindex="6" aria-label="Go to Trip Spending">Your Spending</button>
+      <button class="nav-button" id="signOutButton" tabindex="7" aria-label="Log Out">Sign Out</button>
     </nav>
     <section class="traveler-dashboard-widgets">
       <section class="widget" id="tripRequestWidget">
-        <h1>Discover Your Adventure</h1>
+        <h1 id="tripRequestHeader">Discover Your Adventure</h1>
         <h2>Travel Where You Want</h2>
         <section class="travel-requester">
           <form class="travel-inputs">
             <h3>Request Your Trip</h3>
             <div class="travel-input">
-              <label for="datepicker">Trip Duration</label>
-              <box-icon name='calendar'></box-icon>
-              <input id="datepicker" name="datepicker"/>
-            </div>
-            <div class="travel-input">
               <label for="travelerCount" type="number select">Number of Travelers</label>
               <box-icon name='group'></box-icon>
-              <input id="travelerCount" name="travelerCount" type="number" min="1"/>
+              <input id="travelerCount" name="travelerCount" type="number" min="1" tabindex="8"/>
             </div>
             <div class="travel-input">
-              <button id="destinationSelectButton" type="button">Select a Destination</button>
+              <button id="destinationSelectButton" type="button" tabindex="9">Select a Destination</button>
               <label for="destinationID">Destination ID</label>
               <box-icon type='solid' name='map'></box-icon>
               <input name="destinationID" type="number" id="destinationID" readonly/>
             </div>
+            <div class="travel-input" id="travelInput">
+              <label for="datepicker">Trip Duration</label>
+              <box-icon name='calendar'></box-icon>
+              <input id="datepicker" name="datepicker" readonly="false"/> 
+            </div>
             <div class="travel-input" id="estimatedCostFeedback">
             </div>
             <div class="travel-input">
-              <button id="requestTripButton" type="submit">Get Trip Estimate</button>
-              <button id="confirmRequestTripButton" class="hidden" type="button">Confirm Trip Request</button>
+              <button id="requestTripButton" type="submit" tabindex="14">Get Trip Estimate</button>
+              <button id="confirmRequestTripButton" class="hidden" type="button" tabindex="15">Confirm Trip Request</button>
             </div>
           </form>
           <div class="trip-request-cover"></div>
-          <div class="vacation-destinations hidden"></div>
+          <div class="vacation-destinations hidden" ></div>
         </section>
       </section>
       <section class="widget" id="travelerTripsWidget">
-        <h1>Your Trips</h1>
+        <h1 id="yourTripsHeader">Your Trips</h1>
         <section class="trip-lister-container">
           <section class="trip-lister">
             <h2>Past Trips</h2>
-            <div class="trip-list" id="pastTripsContainer"></div>
+            <div class="trip-list" id="pastTripsContainer" tabindex="16" aria-label="List of Past Trips"></div>
           </section>
           <section class="trip-lister">
             <h2>Upcoming Trips</h2>
-            <div class="trip-list" id="upcomingTripsContainer"></div>
+            <div class="trip-list" id="upcomingTripsContainer" tabindex="18" aria-label="List of Upcoming Trips"></div>
           </section>
         </section>
       </section>
       <section class="widget" id="travelerCostsWidget">
-        <h1>Your Vacation Spending</h1>
+        <h1 id="yourSpendingHeader">Your Spending</h1>
+        <section class="year-buttons"></section>
+        <div class="spending-list"></div>
+        <section class="total-spent" tabindex="19">
+          <h2>Total Spent:</h2>
+          <h2 id="totalSpent">Select Year to See Spending</h2>
+        </section>
       </section>
     </section>
   </section>
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.umd.min.js"></script>
-
 </body>
 </html>
