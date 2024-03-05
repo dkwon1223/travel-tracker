@@ -79,6 +79,7 @@ function renderTravelerDashboard() {
 }
 
 function loadDestinations() {
+    destinationContainer.innerHTML = ``;
     destinations.forEach((destination) => {
         let card = document.createElement("div");
         card.setAttribute("class", "destination-card");
