@@ -365,8 +365,9 @@ body,
   flex-direction: column;
   border-radius: $rounded-border;
   background-color:rgba(255, 255, 255, 0.543);
-  height: 60%;
+  height: 50%;
   width: 80%;
+  margin-bottom: 3%;
   overflow-y: auto;
   .trip-spending-card {
     border: 2px solid rgba(38, 9, 62, 0.373);
@@ -376,6 +377,21 @@ body,
     text-align: center;
     margin-top: 5%;
     margin-bottom: 2%;
+  }
+}
+
+.total-spent {
+  @include flex-centered();
+  width: 80%;
+  height: 15%;
+  background-color:rgba(255, 255, 255, 0.543);
+  margin-bottom: 3%;
+  border-radius: $rounded-border;
+  h5 {
+    height: 50%;
+    width: 40%;
+    text-align: center;
+    font-size: x-large;
   }
 }
 

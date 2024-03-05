@@ -25,6 +25,7 @@ const pastTripsContainer = document.querySelector("#pastTripsContainer");
 const upcomingTripsContainer = document.querySelector("#upcomingTripsContainer");
 const yearButtonsSection = document.querySelector(".year-buttons");
 const tripsSpendingContainer = document.querySelector(".spending-list");
+const totalSpent = document.querySelector("#totalSpent");
 const tripsData = fetchTrips();
 const data = await tripsData;
 const trips = data.trips;
@@ -189,17 +190,19 @@ function loadTripYears() {
             acc.push(tripDate.getFullYear());
         }
         return acc;
-    }, [])
+    }, []);
     years.forEach((year) => {
         let yearButton = document.createElement("button");
         yearButton.setAttribute("class", "year-button");
         yearButton.setAttribute("id", `${year}`);
         yearButton.innerText = `${year}`;
         yearButtonsSection.appendChild(yearButton);
-    })
+    });
 }
 
 function loadTripsSpending(year) {
+    tripsSpendingContainer.innerHTML = ``;
+    let sum = 0;
     let allTrips = trips.reduce((acc, trip) => {
         if(trip.userID === loggedInTraveler.id) {
             acc.push(trip);
@@ -213,7 +216,7 @@ function loadTripsSpending(year) {
     let yearTrips = pastTrips.filter((trip) => {
         let tripDate = new Date(trip.date);
         return tripDate.getFullYear() === year;
-    })
+    });
     yearTrips.forEach((trip) => {
         let card = document.createElement("div");
         card.setAttribute("class", "trip-spending-card");
@@ -226,8 +229,10 @@ function loadTripsSpending(year) {
         Agent Fee(10%): $${Intl.NumberFormat("en-US").format(tripCost.agentFee)}<br>
         Total Cost with Agent Fee: $${Intl.NumberFormat("en-US").format(tripCost.totalCost)}
         </aside>`;
+        sum += tripCost.totalCost;
         tripsSpendingContainer.appendChild(card);
-    })
+    });
+    totalSpent.innerHTML = `$${Intl.NumberFormat("en-US").format(sum)}`;
 }
 
 
@@ -246,25 +251,25 @@ logInButton.addEventListener("click", () => {
         loginErrorMessage.style.color = "red";
         loginErrorMessage.innerHTML = validateLogIn(username, password);
     }
-})
+});
 
 signOutButton.addEventListener("click", () => {
     sessionStorage.removeItem("loggedInTraveler");
     location.reload();
-})
+});
 
 destinationSelectButton.addEventListener("click", () => {
     destinationContainer.classList.toggle("hidden");
     destinationCover.classList.toggle("hidden");
     loadDestinations();
-})
+});
 
 
 destinationContainer.addEventListener("click", (event) => {
     if(event.target.id === "targetDestinationButton") {
         tripDestinationInput.value = event.target.parentElement.id;
     }
-})
+});
 
 tripRequestForm.addEventListener("submit", handleTripRequest);
 
@@ -275,8 +280,14 @@ confirmTripRequestButton.addEventListener("click", () => {
     setTimeout(() => {
         location.reload();
     }, "2000");
-})
+});
 
+yearButtonsSection.addEventListener("click", (event) => {
+    if(event.target.classList.contains("year-button")) {
+        console.log(event.target.id);
+        loadTripsSpending(parseInt(event.target.id));
+    }
+})
 
 
 
