@@ -52,7 +52,7 @@ const picker = new easepick.create({
     css: [
       'https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css',
     ],
-    plugins: ['RangePlugin', 'KbdPlugin'],
+    plugins: ['RangePlugin', 'KbdPlugin', 'LockPlugin'],
     RangePlugin: {
         tooltip: true,
         tooltipNumber(num) {
@@ -63,6 +63,9 @@ const picker = new easepick.create({
     KbdPlugin: {
         dayIndex: 13,
         unitIndex: 14    
+    },
+    LockPlugin: {
+        minDate: today 
     }  
 });
 
