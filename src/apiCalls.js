@@ -62,7 +62,7 @@ function postTrip(trip) {
     fetch("http://localhost:3001/api/v1/trips", {
         method: "POST",
         body: JSON.stringify(trip),
-        headers: { "Content-Type": "application/json"}
+        headers: { "Content-Type": "application/json" }
     })
     .then(response => {
         if(!response.ok) {
@@ -71,7 +71,7 @@ function postTrip(trip) {
         return response.json();
     })
     .then(data => console.log(data))
-    .catch(error => tripRequestFeedback.innerHTML = error.message)
+    .catch(error => console.log(error))
 }
 
 export { fetchTravelersData, fetchTraveler, fetchDestinations, fetchTrips, postTrip }

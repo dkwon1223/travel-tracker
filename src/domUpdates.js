@@ -20,7 +20,6 @@ const destinationContainer = document.querySelector(".vacation-destinations");
 const destinationCover = document.querySelector(".trip-request-cover");
 const tripRequestForm = document.querySelector(".travel-inputs");
 const tripDateInput = document.querySelector("#datepicker");
-const tripDateDiv = document.querySelector("#travelInput");
 const tripTravelerCountInput = document.querySelector("#travelerCount");
 const tripDestinationInput = document.querySelector("#destinationID");
 const tripRequestFeedback = document.querySelector("#estimatedCostFeedback");
@@ -266,7 +265,6 @@ function formatShadowDOM() {
     calendar.setAttribute("tabindex", 13);
     calendarOpener.style.position = "initial";
     calendarOpener.setAttribute("tabindex", 11);    
-    console.log(calendarOpener.shadowRoot.querySelector("button"));
     let difficultButton = calendarOpener.shadowRoot.querySelector("button");
     difficultButton.setAttribute("tabindex", 12)
 }
